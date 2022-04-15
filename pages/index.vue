@@ -22,7 +22,7 @@ export default {
     return{
       items: [
         {icon: 'sfd.jpg', text: "first tab", href: 'https://yandex.ru'},
-        {icon: 'novalny.png', text: "second decision", href: 'https://navalny.com'},
+        {icon: 'novalny.png', text: "second decision", href: 'https://freemason.org/'},
         {icon: 'lorem_ipsum.jpg', text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. \
                                           Maxime aperiam quis nihil nisi laboriosam veritatis repellat \
                                            sint porro itaque dolorem, ", href: 'https://www.lipsum.com'},

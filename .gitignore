@@ -80,5 +80,8 @@ dist
 # IDE
 .idea
 
+# VC
+.editorconfig
+
 # Service worker
 sw.*

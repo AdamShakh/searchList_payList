@@ -9,8 +9,8 @@
         <div>
             <div v-for="(item, i) in fuseResults" :key="i">  <!-- in directSearch  ||  in fuseResults -->
                 <a class="ItemCont" :href="item.item.href" target="_blank">
-                    <div style="width: 60px; height: 60px;"><img :src="item.item.icon" style="width: 60px; height: 60px;" alt="IMG"></div> 
-                    <span style="margin: 10px;"><b>{{item.item.text}}</b></span>
+                    <img style="width: 240px; height: 160px;" :src="item.item.icon" alt="IMG">
+                    <span style="margin: 1.5em;"><b>{{item.item.text}}</b></span>
                 </a>
                 <hr>
             </div>
@@ -20,12 +20,14 @@
 </template>
 
 <script>
-import VueFuse from 'vue-fuse'
-/* Vue.use(VueFuse) */
+//import VueFuse from 'vue-fuse'
+//Vue.use(VueFuse)
+import Fuse from 'fuse.js'
 
 export default {
     components:{
-        VueFuse
+        //VueFuse
+        Fuse
     },
     props:{
         items:{
@@ -43,11 +45,11 @@ export default {
         }
     },
     computed:{
-        directSearch(){
+        /*directSearch(){
             return this.items.filter(el=>{
                 return el.text.indexOf(this.query) !== -1
             })
-        },
+        },*/
         /* fuseSearchLive(){   // instead query in watch
             let i = this.query
             this.fuseSearch()
@@ -59,19 +61,24 @@ export default {
     },
     methods:{
         fuseSearch () {
-            this.$search(this.query, this.items, { includeScore: true, 
+            /*this.$search(this.query, this.items, { includeScore: true, 
                                                    shouldSort: true, 
                                                    threshold: 0.3, 
                                                    keys: ['text'] }).then(result => {
-                this.fuseResults = result;
-                console.log(result); //
-            })
+                this.fuseResults = result
+            })*/
+
+            const fuse = new Fuse(this.items, { includeScore: true, 
+                                                   shouldSort: true, 
+                                                   threshold: 0.3, 
+                                                   keys: ['text'] })
+            this.fuseResults = fuse.search(this.query)
         }
     },
     mounted(){
-        this.query = ' '
+        /*this.query = ' '
         this.fuseSearch();
-        this.query = ''
+        this.query = ''*/
     },
     watch:{
         query:function(val){
